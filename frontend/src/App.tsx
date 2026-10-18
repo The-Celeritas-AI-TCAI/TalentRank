@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { UploadCloud, FileText, FileSpreadsheet, X, CheckCircle2, AlertCircle, LoaderCircle, Download, ShieldCheck, ChevronDown, BriefcaseBusiness, SearchCheck, RefreshCw, Info } from 'lucide-react';
 import './styles.css';
 
-const API = (import.meta as any).env?.VITE_API_URL || 'http://127.0.0.1:8000/api';
+const API = ((import.meta as any).env?.VITE_API_URL || 'https://talentrank-1.onrender.com').replace(/\/+$/, '') + '/api';
 const ROLES = ['AI/ML Engineer','Data Scientist','Data Engineer','Software Engineer','Cloud / GCP Engineer','DevOps Engineer','Business Analyst','QA Engineer','Product Analyst','Other / Custom Role'];
 type Profile = {
   email?: string; phone?: string; location?: string; latest_role?: string;
@@ -54,7 +54,7 @@ function App(){
         setScreening(data.screening);setCandidates(data.candidates);setJd(data.screening.description);
         if(ROLES.includes(data.screening.title))setRole(data.screening.title);else{setRole('Other / Custom Role');setCustomRole(data.screening.title);}
       }
-    }catch(e:any){setError(`Could not connect to the backend. Confirm FastAPI is running at 127.0.0.1:8000. ${e.message}`);}
+    }catch(e:any){setError(`Could not connect to the backend at ${API}. Please check the deployed API service. ${e.message}`);}
     finally{setLoading(false);}
   })();},[]);
 
