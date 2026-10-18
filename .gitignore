@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+backend/talentrank.db
+backend/.env
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+# Editors
+.vscode/
+.idea/

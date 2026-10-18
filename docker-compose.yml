@@ -1,0 +1,17 @@
+services:
+  api:
+    build: ./backend
+    ports: ["8000:8000"]
+    environment:
+      DATABASE_URL: sqlite:////data/talentrank.db
+      CORS_ORIGINS: http://localhost:5173
+    volumes:
+      - talentrank-data:/data
+  web:
+    build: ./frontend
+    ports: ["5173:80"]
+    environment:
+      VITE_API_URL: http://localhost:8000/api
+    depends_on: [api]
+volumes:
+  talentrank-data:
